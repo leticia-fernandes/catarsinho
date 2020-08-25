@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Catarsinho</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4 text-center">
+          <%= image_tag ("/assets/logo-white.png"), class: "w-100"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Encontre projetos" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button"><%= fa_icon "search" %></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
