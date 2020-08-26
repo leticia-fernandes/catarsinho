@@ -18,12 +18,17 @@
       </div>
       <div class="row">
         <div class="col-md-6 offset-md-3 text-center">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Encontre projetos" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button"><%= fa_icon "search" %></button>
+          <%= form_tag(find_projects_path, method: :get) do %>
+            <div class="input-group mb-3">
+              <%= text_field_tag 'search', '', placeholder: "Encontre projetos...", class: "form-control"  %>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><%= fa_icon "search" %></button>
+              </div>
             </div>
-          </div>
+          <% end %>
+          <%= link_to find_projects_path do%>
+            <button class="btn btn-outline-secondary">Veja os projetos da nossa plataforma</button>
+          <% end %>
         </div>
       </div>
     </div>

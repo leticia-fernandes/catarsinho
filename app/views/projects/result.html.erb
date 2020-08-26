@@ -1,0 +1,13 @@
+<div class="container default-form">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="title">Pesquisa</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p><%= @projects.count %> resultado(s) encontrado(s)</p>
+    </div>
+  </div>
+  <%= render 'list', resource: @projects %>
+</div>

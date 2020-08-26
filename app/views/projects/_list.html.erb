@@ -1,0 +1,44 @@
+ <%= display_order %>
+
+<% resource.each  do |project| %>
+  <div class="row">
+    <div class="col-md-12 text-right actions-project">
+      <% if display_project_actions?(project: project) %>
+        <%= display_edit_project_action(id: project.id) %>
+        <%= display_delete_project_action(id: project.id) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 box-project">
+      <%= link_to project_path(project.id) do %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title">
+              <%= project.title %>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-6 ">
+            <div class="yellow-box">
+              <div class="subtitle">Meta de Arrecadação</div>
+              <div class="content"><%= convert_money(project.goal) %></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="yellow-box">
+              <div class="subtitle">Encerramento</div>
+              <div class="content"><%= project.closing_date.strftime("%d/%m/%Y") %></div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-12 days-remaining">
+            <%= display_days_remaining(closing_date: project.closing_date) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<%end%>

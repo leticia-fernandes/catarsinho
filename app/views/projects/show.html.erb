@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-right actions-project">
+      <% if display_project_actions?(project: @project) %>
+        <%= display_edit_project_action(id: @project.id) %>
+        <%= display_delete_project_action(id: @project.id) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 box-project">
+      <div class="title">
+        <%= @project.title %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 content-project">
+          <div class="description text-justify">
+            <%= @project.description %>
+          </div>
+          <div class="closing">
+            <h2>Data de Encerramento</h2>
+            <p><%= @project.closing_date.strftime("%d/%m/%Y") %></p>
+          </div>
+          <div class="donators">
+            <h2>Apoiadores</h2>
+            <%= display_donators(project: @project) %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <%= display_donation_button(project: @project) %>
+          <div class="text-center w-100 closing"><%= display_days_remaining(closing_date: @project.closing_date) %></p>
+          <div class="w-100 text-center box-outline">
+            <h2>Meta de Arrecadação</h2>
+            <p><%= convert_money(@project.goal) %></p>
+          </div>
+          <div class="w-100 text-center box-blue">
+            <h2>Total Arrecadado</h2>
+            <p><%= convert_money(@project.goal) %></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+

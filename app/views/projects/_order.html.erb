@@ -1,0 +1,13 @@
+<div class="row select-order">
+  <div class="col-md-9"></div>
+  <div class="col-md-3">
+    <%= form_tag(find_projects_path, method: :get, class: "form") do %>
+      <%= hidden_field_tag 'search', params[:search] %>
+      <%= select_tag 'order',
+                      options_for_select({ "Título" => "title", "Meta de Arrecadação" => "goal", "Data de Encerramento" => "closing_date" }, params[:order]),
+                      prompt: "Ordenar",
+                      class: "form-control",
+                      onchange: "this.form.submit();"  %>
+    <% end %>
+  </div>
+</div>

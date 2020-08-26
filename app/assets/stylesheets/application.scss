@@ -1,0 +1,258 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+ @import "bootstrap";
+ @import "font-awesome";
+
+ @font-face {
+	font-family: 'Dosis';
+	src: url('/assets/Dosis-VariableFont_wght.ttf');
+ }
+
+$secondaryColor: #edc10c;
+$mainColor: #7eb7d6;
+$mainFont: 'Dosis', sans-serif;
+
+body {
+  padding-bottom: 100px;
+  background-color: #7eb7d6;
+  font-family: $mainFont;
+}
+
+#error_explanation {
+  h2{
+    font-size: 1.5em;
+  }
+
+  @extend .alert;
+  @extend .alert-danger;
+}
+
+#navbar-c {
+  background-color: white !important;
+  margin-bottom: 50px;
+  padding: 5px 20px 5px 20px;
+
+  a {
+    color: $mainColor;
+   }
+   a:hover {
+     color: $secondaryColor;
+   }
+
+  .img-nav {
+    width: 40px;
+  }
+
+  .navbar-brand {
+    padding: 0 !important;
+  }
+
+  .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 18px;
+    margin-left: 15px;
+  }
+}
+
+.actions-project {
+  font-size: 20px;
+  padding: 0px;
+
+  a{
+    color: white
+  }
+
+  a:hover {
+    color: $secondaryColor
+  }
+
+  i {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+
+.btn-catarsinho {
+  color: $mainColor;
+  background-color: white;
+}
+.btn-catarsinho:hover {
+  color: white;
+  background-color: $secondaryColor;
+}
+
+.btn-catarsinho-yellow {
+  color: white;
+  background-color:  $secondaryColor;
+  font-weight: bold;
+}
+.btn-catarsinho-yellow:hover {
+  color: white;
+  background-color: $mainColor;
+}
+.btn-catarsinho-yellow:disabled {
+  background-color: gray;
+}
+
+.btn-outline-secondary {
+  border: 0 !important;
+  color: white;
+}
+.btn-outline-secondary:hover {
+  background-color: $secondaryColor !important;
+}
+
+.box-project {
+  background-color: white;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  padding: 20px;
+  font-weight: bold;
+
+  a {
+    text-decoration: none;
+  }
+
+  span.days {
+    background-color: $secondaryColor;
+    font-size: 20px;
+    padding: 5px 8px 5px 8px;
+    border-radius: 10px;
+    margin: 5px;
+  }
+
+  .box-outline {
+    border: 3px solid $mainColor;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px;
+
+    h2 {
+      font-size: 20px;
+      color: $mainColor;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 35px;
+      color: $secondaryColor;
+    }
+  }
+
+  .box-blue {
+    @extend .box-outline;
+
+    background-color: $mainColor;
+
+    h2 {
+      color: white;
+    }
+
+    p {
+      color: white;
+    }
+  }
+
+  .content {
+    color: white;
+    font-size: 30px;
+  }
+
+  .content-project{
+    h2 {
+      color: $secondaryColor;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+    p {
+      font-size: 15px;
+      margin-left: 15px;
+      color: $mainColor;
+    }
+  }
+
+  .closing {
+    margin-top: 20px;
+  }
+
+  .days-remaining {
+    color: black;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-weight: normal;
+    font-size: 15px;
+    color: #616161;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: black;
+  }
+
+  .title {
+    font-size: 28px;
+    color: black !important;
+    margin-bottom: 15px;
+  }
+
+  .yellow-box {
+    background-color: $secondaryColor;
+    padding: 50px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
+}
+
+.box-project:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.default-form {
+  a {
+    color: white;
+  }
+
+  .title {
+    margin-bottom: 20px;
+    color: white;
+    font-weight: bold;
+  }
+}
+
+.select-order {
+  margin: 0px 0px 20px 0px;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
