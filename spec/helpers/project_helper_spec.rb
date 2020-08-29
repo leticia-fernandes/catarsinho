@@ -156,4 +156,36 @@ RSpec.describe ProjectsHelper, type: :helper do
       end
     end
   end
+
+  describe "#display_image_preview" do
+    context "Quando o projeto possui imagem" do
+      it "retorna preview da imagem" do
+        content = image_tag(project.image.variant(resize: "150"))
+        expect(helper.display_image_preview(project: project)).to eq(content)
+      end
+    end
+
+    context "Quando o projeto não possui imagem" do
+      before { allow(project.image).to receive(:attached?).and_return(false) }
+      it "retorna nil" do
+        expect(helper.display_image_preview(project: project)).to be_nil
+      end
+    end
+  end
+
+  describe "#display_image" do
+    context "Quando o projeto possui imagem" do
+      it "retorna preview da imagem" do
+        content = image_tag(project.image, class: "w-100" )
+        expect(helper.display_image(project: project)).to eq(content)
+      end
+    end
+
+    context "Quando o projeto não possui imagem" do
+      before { allow(project.image).to receive(:attached?).and_return(false) }
+      it "retorna nil" do
+        expect(helper.display_image(project: project)).to be_nil
+      end
+    end
+  end
 end

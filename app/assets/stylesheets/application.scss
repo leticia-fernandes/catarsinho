@@ -31,7 +31,7 @@ body {
 }
 
 #error_explanation {
-  h2{
+  h2 {
     font-size: 1.5em;
   }
 
@@ -171,12 +171,17 @@ body {
     font-size: 30px;
   }
 
-  .content-project{
+  .content-project {
     h2 {
       color: $secondaryColor;
       font-size: 20px;
       margin-top: 20px;
     }
+
+    img {
+      border-radius: 10px;
+    }
+
     p {
       font-size: 15px;
       margin-left: 15px;
@@ -198,6 +203,7 @@ body {
     font-weight: normal;
     font-size: 15px;
     color: #616161;
+    margin-top: 20px;
   }
 
   .subtitle {

@@ -62,4 +62,12 @@ module ProjectsHelper
   def display_order
     render partial: 'order'
   end
+
+  def display_image_preview(project:)
+    image_tag(project.image.variant(resize: "150")) if project.image.attached?
+  end
+
+  def display_image(project:)
+    image_tag(project.image, class: "w-100" ) if project.image.attached?
+  end
 end

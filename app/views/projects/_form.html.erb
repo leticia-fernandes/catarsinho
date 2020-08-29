@@ -3,22 +3,43 @@
 
   <div class="form-group">
     <%= f.label 'Título' %><br />
-    <%= f.text_field :title, autofocus: true, class:'form-control' %>
+    <%= f.text_field :title, autofocus: true, maxlength: 64,
+                      class:'form-control', required:true %>
+    <small class="form-text text-white">Até 64 caracteres</small>
   </div>
 
   <div class="form-group">
     <%= f.label 'Descrição' %><br />
-    <%= f.text_area :description, class:'form-control', maxlength: 512, rows: 8 %>
+    <%= f.text_area :description, maxlength: 512, rows: 8,
+                     class:'form-control', required: true %>
+    <small class="form-text text-white">Até 512 caracteres</small>
   </div>
 
   <div class="form-group">
     <%= f.label 'Meta de Arrecadação' %><br />
-    <%= f.number_field :goal, class:'form-control money', min: 1, max: 500 %>
+    <%= f.number_field :goal, min: 1, max: 500,
+                        class:'form-control money', required: true %>
+    <small class="form-text text-white">Entre 1 e 500</small>
   </div>
 
   <div class="form-group">
     <%= f.label 'Data de Encerramento' %><br />
-    <%= f.date_field :closing_date, as: :date, min: Date.tomorrow, max: Date.today+29.days, class: 'form-control' %>
+    <%= f.date_field :closing_date, as: :date,
+                      min: Date.tomorrow, max: Date.today+29.days,
+                      class: 'form-control', required: true %>
+    <small class="form-text text-white">
+      Deve ser entre <%= Date.tomorrow.strftime("%d/%m/%Y")%> e <%= (Date.today+29.days).strftime("%d/%m/%Y")%>
+    </small>
+  </div>
+
+   <div class="form-group">
+    <%= f.label 'Imagem do Projeto' %><br />
+    <div class="text-center">
+      <%= display_image_preview(project: resource)%>
+    </div>
+    <br>
+    <%= f.file_field :image, class: 'form-control' %>
+    <small class="form-text text-white">Deve ser do tipo imagem</small>
   </div>
 
   <div class="actions">

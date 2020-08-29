@@ -11,7 +11,7 @@ RSpec.describe Project, type: :model do
 
   describe "Relações" do
     it { is_expected.to belong_to(:user) }
-    it { is_expected.to have_many(:donations) }
+    it { is_expected.to have_many(:donations).dependent(:delete_all) }
     it { is_expected.to have_many(:donators).through(:donations) }
   end
 
@@ -28,6 +28,33 @@ RSpec.describe Project, type: :model do
                         is_greater_than(0).
                         is_less_than_or_equal_to(Project::MAX_GOAL) }
     it { is_expected.to validate_inclusion_of(:closing_date).in_range((Date.tomorrow)...(Date.today+30.days)) }
+
+    describe 'Imagem' do
+      context "Quando o arquivo é enviado" do
+        context "Quando o arquivo é do tipo imagem" do
+          it 'anexa o arquivo' do
+            subject.image.attach(fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test-image.png'), 'image/png'))
+            expect(subject.image).to be_attached
+          end
+        end
+
+        context "Quando o arquivo  não é do tipo imagem" do
+          it 'retorna mensagem de erro' do
+            subject.image.attach(fixture_file_upload(Rails.root.join('spec', 'support', 'files', 'test-pdf.pdf'), 'application/pdf'))
+            subject.save
+            expect(subject.errors.messages[:base]).to include("O arquivo deve ser uma imagem.")
+          end
+        end
+      end
+
+      context "Quando o arquivo não é enviado" do
+        it "retorna mensagem de erro" do
+          subject.image.attach(nil)
+          subject.save
+          expect(subject.errors.messages[:base]).to include("Uma imagem deve ser enviada.")
+        end
+      end
+    end
   end
 
   describe "Factory" do

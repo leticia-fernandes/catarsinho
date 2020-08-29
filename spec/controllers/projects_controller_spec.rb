@@ -43,7 +43,9 @@ RSpec.describe ProjectsController, type: :controller do
                             title: subject.title,
                             description: subject.description,
                             goal: subject.goal,
-                            closing_date: subject.closing_date }
+                            closing_date: subject.closing_date,
+                            image: fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test-image.png'), 'image/png')
+                            }
                           }
                         }
 
@@ -52,6 +54,12 @@ RSpec.describe ProjectsController, type: :controller do
           expect {
             post :create, params: valid_params
           }.to change(Project, :count).by(1)
+        end
+
+        it "anexa a imagem" do
+          expect {
+            post :create, params: valid_params
+          }.to change(ActiveStorage::Attachment, :count).by(1)
         end
 
         it "redireciona para authenticated_root_path" do
