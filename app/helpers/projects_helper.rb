@@ -49,6 +49,6 @@ module ProjectsHelper
   end
 
   def display_order
-    render 'order'
+    render partial: 'order'
   end
 end
