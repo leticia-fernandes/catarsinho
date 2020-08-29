@@ -1,0 +1,17 @@
+<%= form_for resource, url: project_donations_path do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+    <%= f.label 'Projeto' %><br />
+    <%= link_to project.title, project_path(project), class: "btn btn-outline-secondary", target: "_blank" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Valor' %><br />
+    <%= f.number_field :value, class:'form-control money', min: 1 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Efetivar doação", class:'btn btn-catarsinho' %>
+  </div>
+<% end %>

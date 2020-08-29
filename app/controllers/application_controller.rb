@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name])
   end
+
+  def not_found_redirect
+    redirect_to find_projects_path
+  end
 end

@@ -5,5 +5,12 @@ FactoryBot.define do
     goal         { Faker::Number.within(range: 1..500) }
     closing_date { Faker::Date.between(from: Date.tomorrow, to: Date.today+29.days ) }
     user
+
+    trait :with_donations do
+      after(:create) do |project|
+        project.donations << build(:donation)
+        project.donations << build(:donation)
+      end
+    end
   end
 end

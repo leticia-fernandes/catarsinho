@@ -11,6 +11,8 @@ RSpec.describe Project, type: :model do
 
   describe "Relações" do
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:donations) }
+    it { is_expected.to have_many(:donators).through(:donations) }
   end
 
   describe "Validações" do
@@ -31,5 +33,31 @@ RSpec.describe Project, type: :model do
   describe "Factory" do
     it { expect(build(:project)).to be_a Project }
     it { expect(build(:project)).to be_valid }
+  end
+
+  describe "Métodos" do
+    let(:project) { create(:project) }
+
+    describe ".is_open?" do
+      context "Quando o projeto está entre a data atual e menor que a data atual + 30 dias" do
+        it "retorna verdadeiro" do
+          expect(project.is_open?).to be true
+        end
+      end
+
+      context "Quando o projeto não está entre a data atual e menor que a data atual + 30 dias" do
+        before { allow(project).to receive(:closing_date).and_return(Date.yesterday) }
+
+        it "retorna falso" do
+          expect(project.is_open?).to be false
+        end
+      end
+    end
+
+    describe "#total_donations" do
+      it "retorna a soma das doações do projeto" do
+        expect(project.total_donations).to eq(project.donations.sum(:value))
+      end
+    end
   end
 end

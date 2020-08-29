@@ -7,4 +7,5 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   has_many :projects, class_name: 'Project'
+  has_many :donations, class_name: 'Donation'
 end

@@ -106,29 +106,11 @@ RSpec.describe ProjectsHelper, type: :helper do
     end
 
     context "Quando a campanha está não encerrada" do
-      context "Quando o usuário não estiver logado" do
-        it "retorna botão habilitado" do
-          expect(helper.display_donation_button(project: project)).
-          to eq(content_tag(:button, "Apoie!", class: "btn btn-lg btn-catarsinho-yellow w-100", disabled: false ))
-        end
-      end
-
-      context "Quando o usuário estiver logado" do
-        context "Quando o usuário não for dono do projeto" do
-          before { login_user }
-          it "retorna botão habilitado" do
-            expect(helper.display_donation_button(project: project)).
-            to eq(content_tag(:button, "Apoie!", class: "btn btn-lg btn-catarsinho-yellow w-100", disabled: false ))
-          end
-        end
-
-        context "Quando o usuário for dono do projeto" do
-          before { login_user(user_owner) }
-          it "retorna botão desabilitado" do
-            expect(helper.display_donation_button(project: project)).
-            to eq(content_tag(:button, "Apoie!", class: "btn btn-lg btn-catarsinho-yellow w-100", disabled: true ))
-          end
-        end
+      it "retorna botão habilitado" do
+        content = content_tag :a, href: new_project_donation_path(project_id: project.id) do
+                    content_tag(:button, "Apoie!", class: "btn btn-lg btn-catarsinho-yellow w-100", disabled: false )
+                  end
+        expect(helper.display_donation_button(project: project)).to eq(content)
       end
     end
   end
@@ -139,6 +121,39 @@ RSpec.describe ProjectsHelper, type: :helper do
       helper.display_order
 
       expect(helper).to have_received(:render).with(partial: "order")
+    end
+  end
+
+  describe "#display_donators" do
+    context "Quando o projeto não possui apoiadores" do
+      context "Quando a campanha está aberta" do
+        it "retorna botão para apoiar projeto" do
+          content = content_tag :a, href: new_project_donation_path(project_id: project.id) do
+                      content_tag(:button, "Seja um apoiador!", class: "btn btn-catarsinho")
+                    end
+          expect(helper.display_donators(project: project)).to eq(content)
+        end
+      end
+
+      context "Quando a campanha está encerrada" do
+        before { allow(project).to receive(:closing_date).and_return(Date.yesterday) }
+
+        it "retorna parágrafo com mensagem" do
+          content = content_tag(:p, "Nenhum apoiador.", class: "text-muted")
+          expect(helper.display_donators(project: project)).to eq(content)
+        end
+      end
+    end
+
+    context "Quando projeto possui apoiadores" do
+      let(:project_with_donations) { create(:project, :with_donations) }
+
+      it "retorna um parágrafo com o nome dos apoiadores" do
+        content = content_tag(:p,
+                                project_with_donations.donators.uniq.map(&:name).join(", "),
+                                class: "donators")
+        expect(helper.display_donators(project: project_with_donations)).to eq(content)
+      end
     end
   end
 end

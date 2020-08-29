@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
 
   describe "Relações" do
     it { is_expected.to have_many(:projects) }
+    it { is_expected.to have_many(:donations) }
   end
 
   describe "Validações" do

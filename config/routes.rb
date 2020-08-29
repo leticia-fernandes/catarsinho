@@ -9,8 +9,9 @@ Rails.application.routes.draw do
     collection do
       get :find
     end
+
+    resources :donations, only: [:new, :create]
   end
 
   root 'home#index', as: 'home_index'
-
 end

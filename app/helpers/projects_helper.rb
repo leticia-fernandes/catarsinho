@@ -36,16 +36,27 @@ module ProjectsHelper
   end
 
   def display_donation_button(project:)
-    if calc_days_remaining(project.closing_date) < 0
-      content_tag(:button, "Encerrado", class: "btn btn-lg btn-secondary w-100", disabled: true )
+    if project.is_open?
+      content_tag :a, href: new_project_donation_path(project_id: project.id) do
+        content_tag(:button, "Apoie!", class: "btn btn-lg btn-catarsinho-yellow w-100", disabled: false )
+      end
     else
-      disabled = current_user.projects.include?(project) if user_signed_in?
-      content_tag(:button, "Apoie!", class: "btn btn-lg btn-catarsinho-yellow w-100", disabled: disabled )
+      content_tag(:button, "Encerrado", class: "btn btn-lg btn-secondary w-100", disabled: true )
     end
   end
 
   def display_donators(project:)
-    content_tag(:button, "Seja um apoiador!", class: "btn btn-catarsinho")
+    if project.donators.empty?
+      if project.is_open?
+        content_tag :a, href: new_project_donation_path(project_id: project.id) do
+          content_tag(:button, "Seja um apoiador!", class: "btn btn-catarsinho")
+        end
+      else
+        content_tag(:p, "Nenhum apoiador.", class: "text-muted")
+      end
+    else
+      content_tag(:p, project.donators.uniq.map(&:name).join(", "), class: "donators")
+    end
   end
 
   def display_order

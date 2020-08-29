@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :find]
+  before_action :set_user_project, only: [:edit, :update, :destroy]
+  before_action :set_project, only: [:show]
 
   def index
     @projects = current_user.projects
@@ -10,9 +12,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  def edit
-    @project = current_user.projects.find(params[:id])
-  end
+  def edit; end
 
   def create
     @project = current_user.projects.new(project_params)
@@ -26,8 +26,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = current_user.projects.find(params[:id])
-
     if @project.update(project_params)
       flash[:notice] = "Projeto atualizado com sucesso."
       redirect_to @project
@@ -36,9 +34,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
-    @project = Project.find(params[:id])
-  end
+  def show; end
 
   def find
     @projects = Project.order(params[:order])
@@ -53,13 +49,29 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = current_user.projects.find(params[:id])
     @project.destroy
 
     redirect_back fallback_location: authenticated_root_path
   end
 
   private
+
+  def set_user_project
+    @project = current_user.projects.find_by(id: params[:id])
+    verify_project_exists
+  end
+
+  def set_project
+    @project = Project.find_by(id: params[:id])
+    verify_project_exists
+  end
+
+  def verify_project_exists
+    if @project.blank?
+      flash[:alert] = "Projeto não encontrado."
+      not_found_redirect
+    end
+  end
 
   def project_params
     params.require(:project).permit(:id, :title, :description, :goal, :closing_date)
