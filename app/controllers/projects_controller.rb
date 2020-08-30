@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       flash[:notice] = "Projeto criado com sucesso."
-      redirect_to authenticated_root_path
+      redirect_to @project
     else
       render "new"
     end

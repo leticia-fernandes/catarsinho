@@ -67,7 +67,7 @@ module ProjectsHelper
     image_tag(project.image.variant(resize: "150")) if project.image.attached?
   end
 
-  def display_image(project:)
-    image_tag(project.image, class: "w-100" ) if project.image.attached?
+  def display_image(project:, class_img: "w-100")
+    image_tag(project.image, class: class_img) if project.image.attached?
   end
 end

@@ -21,13 +21,16 @@
             </div>
           </div>
           <div class="row text-center">
-            <div class="col-md-6 ">
+            <div class="col-md-8 img-project">
+            <div>
+              <%=  display_image(project: project, class_img: "") %>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="yellow-box">
                 <div class="subtitle">Meta de Arrecadação</div>
                 <div class="content"><%= convert_money(project.goal) %></div>
               </div>
-            </div>
-            <div class="col-md-6">
               <div class="yellow-box">
                 <div class="subtitle">Encerramento</div>
                 <div class="content"><%= project.closing_date.strftime("%d/%m/%Y") %></div>
