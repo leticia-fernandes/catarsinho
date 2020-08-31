@@ -1,24 +1,26 @@
-# README
+# Catarsinho
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Clonando o projeto
 
-Things you may want to cover:
+`git clone https://github.com/leticia-fernandes/catarsinho.git`
 
-* Ruby version
+### Executando docker
 
-* System dependencies
+Entrar na pasta do projeto
 
-* Configuration
+`cd catarsinho`
 
-* Database creation
+Executar os seguintes comandos
 
-* Database initialization
+- `docker-compose build`
+- `docker-compose up`
 
-* How to run the test suite
+Em um outro terminal executar o comando:
 
-* Services (job queues, cache servers, search engines, etc.)
+- `docker-compose run web rails db:create db:migrate db:seed`
 
-* Deployment instructions
+### Abrindo o sistema
 
-* ...
+Acessar no navegador
+
+`http://localhost:3000`
